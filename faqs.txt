@@ -1,0 +1,5 @@
+Thuật toán SHA-1, viết tắt của Secure Hash Algorithm 1, là một thuật toán băm được thiết kế để tạo ra một giá trị băm (hash) có độ dài cố định là 160 bit từ một đầu vào bất kỳ. Được công bố bởi Cơ quan An toàn Quốc gia Hoa Kỳ (NIST) vào năm 1993, SHA-1 nhanh chóng trở thành một trong những thuật toán băm phổ biến và được sử dụng rộng rãi trong các ứng dụng bảo mật.
+
+Thuật toán SHA-1 hoạt động bằng cách chia dữ liệu đầu vào thành các khối và sau đó áp dụng một loạt các phép biến đổi đồng nhất, bao gồm các phép XOR, AND, OR, và các phép xoay bit, trong quá trình lặp. Quá trình này được thực hiện theo một cách đặc biệt để đảm bảo tính ngẫu nhiên và không dự đoán của giá trị băm.
+
+Mục tiêu của SHA-1 là tạo ra một giá trị hash duy nhất cho mỗi đầu vào khác nhau và làm cho việc tính toán ngược lại từ giá trị hash để tìm ra đầu vào là không khả thi. Tuy nhiên, do các vấn đề liên quan đến đụng độ và khả năng tìm kiếm các đầu vào tạo ra cùng một giá trị hash, SHA-1 đã bị thay thế bởi các thuật toán băm mạnh mẽ hơn trong nhiều ứng dụng an toàn hiện đại.
