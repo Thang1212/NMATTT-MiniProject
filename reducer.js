@@ -3,7 +3,7 @@ import sha1 from './js/sha1.js';
 import md5 from './js/md5.js';
 
 const init = {
-	filterSection: 'features',
+	filterSection: 'hero',
 	sha1Arr: [null, null],
 	md5Arr: [null, null],
 	// todos: storage.get(),
