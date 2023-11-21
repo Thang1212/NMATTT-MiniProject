@@ -1,5 +1,4 @@
 // import storage from './util/storage.js';
-import sha1 from './js/sha1.js';
 import md5 from './js/md5.js';
 
 // https://drive.google.com/uc?export=view&id=
