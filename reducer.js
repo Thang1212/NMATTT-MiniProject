@@ -5,7 +5,7 @@ import md5 from './js/md5.js';
 // https://drive.google.com/uc?export=view&id=
 
 const init = {
-	filterSection: 'features',
+	filterSection: 'hero',
 
 	sha1Obj: {
 		value: null,
