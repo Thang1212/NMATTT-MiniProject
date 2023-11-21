@@ -1,14 +1,14 @@
 import html from '../core.js';
 import { connect } from '../store.js';
 
-function FeaturesSection({ img, sha1Obj, md5Obj }) {
+function FeaturesSection({ img, sha1Obj, md5Obj, rsaObj }) {
     return html`
         <section>
             <div class="py-2 text-center container">
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
-                        <h1 class="fw-light">Album example</h1>
-                        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                        <h1 class="fw-light">Album</h1>
+                        <p class="lead text-body-secondary">Album sưu tầm về mật mã học gồm những thuật toán nổi tiếng như SHA-1, MD5, RSA, v.v. Mỗi thuật toán là một tác phẩm an ninh số, là điểm nhấn của bảo mật thông tin.</p>
                     </div>
                 </div>
             </div>
@@ -67,6 +67,49 @@ function FeaturesSection({ img, sha1Obj, md5Obj }) {
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary"
                                                 onClick="dispatch('hashPasswordByMD5', document.getElementById('md5-password').value)"
+                                            >
+                                                View
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src=${img.rsaThumbnail.link} />
+                                <div class="card-body">
+                                    <p class="card-text">Thuật toán RSA là một phương pháp mã hóa khóa công khai phổ biến. Nó sử dụng hai khóa: một khóa công khai để mã hoá và một khóa riêng tư để giải mã.</p>
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="rsa-receiver-private-key" class="col-form-label">1024 bit RSA Public key của người nhận:</label>
+                                            <textarea class="form-control text-success" id="rsa-receiver-private-key">${rsaObj.receiverPublicKey !== null && rsaObj.receiverPublicKey}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rsa-receiver-public-key" class="col-form-label">1024 bit RSA Private key của người nhận:</label>
+                                            <textarea class="form-control text-success" id="rsa-receiver-private-key">${rsaObj.receiverPrivateKey !== null && rsaObj.receiverPrivateKey}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rsa-message" class="col-form-label">Message của người gửi:</label>
+                                            <input type="text" class="form-control" id="rsa-message" placeholder="Ex: Good morning!!" value="${rsaObj.message !== null && rsaObj.message}" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rsa-encrypted-value" class="col-form-label">Mã hoá message bằng public key của người nhận:</label>
+                                            <textarea class="form-control text-success" id="rsa-encrypted-value">${rsaObj.encryptedMessage !== null && rsaObj.encryptedMessage}</textarea>
+                                        </div>
+                                    </form>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary">#gcd #encrypted</small>
+                                        <div class="btn-group">
+                                            <button 
+                                                type="button" class="btn btn-sm btn-outline-secondary"
+                                                onClick="dispatch('generateNewRSAKeys')"
+                                            >
+                                                Generate new key
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onClick="dispatch('encryptedMessageByRSA', document.getElementById('rsa-message').value)"
                                             >
                                                 View
                                             </button>

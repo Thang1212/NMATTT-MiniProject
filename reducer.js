@@ -1,7 +1,6 @@
-// import storage from './util/storage.js';
+import './js/sha1.js';
 import md5 from './js/md5.js';
-
-// https://drive.google.com/uc?export=view&id=
+import './js/rsa.js';
 
 const init = {
 	filterSection: 'hero',
@@ -14,6 +13,13 @@ const init = {
 	md5Obj: {
 		value: null,
 		hashValue: null,
+	},
+
+	rsaObj: {
+		receiverPublicKey: null,
+		receiverPrivateKey: null,
+		message: null,
+		encryptedMessage: null
 	},
 
 	img: {
@@ -35,17 +41,16 @@ const init = {
 		md5Thumbnail: {
 			src: '../img/md5.png',
 			link: 'https://drive.google.com/uc?export=view&id=1mkCst1Qz8RKHlW_oie6QRI5eDTQZd1WK'
+		},
+
+		rsaThumbnail: {
+			src: '../img/rsathumbnail.jpg',
+			link: 'https://drive.google.com/uc?export=view&id=1mtEweiGBv3Ve04tlP_K_LSTqFnmqYW5O' 
 		}
 	}
-	// todos: storage.get(),
-	// filter: 'all',
-	// filters: {
-	// 	all: () => true,
-	// 	active: todo => !todo.completed,
-	// 	completed: todo => todo.completed
-	// },
-	// editIndex: null
 };
+
+let crypt = new JSEncrypt();
 
 const actions = {
 	changeAboutSection(state) {
@@ -61,68 +66,33 @@ const actions = {
 	},
 
 	hashPasswordBySHA1(state, passVal) {
-		state.sha1Obj.value = passVal;
-		state.sha1Obj.hashValue = sha1(passVal);
+		if (passVal !== '') {
+			state.sha1Obj.value = passVal;
+			state.sha1Obj.hashValue = sha1(passVal);
+		}
 	},
 
 	hashPasswordByMD5(state, passVal) {
-		state.md5Obj.value = passVal;
-		state.md5Obj.hashValue = md5(passVal);
+		if (passVal !== '') {
+			state.md5Obj.value = passVal;
+			state.md5Obj.hashValue = md5(passVal);
+		}
 	},
 
-	// add({ todos }, title) {
-	// 	if (title) {
-	// 		todos.push({ title, completed: false });
-	// 		storage.set(todos);
-	// 	}
-	// },
+	generateNewRSAKeys(state) {
+		state.rsaObj.receiverPublicKey = crypt.getPublicKey();
+		state.rsaObj.receiverPrivateKey = crypt.getPrivateKey();
+	},
 
-	// toggle({ todos }, index) {
-	// 	const todo = todos[index];
-	// 	todo.completed = !todo.completed;
-	// 	storage.set(todos);
-	// },
+	encryptedMessageByRSA(state, messageValue) {
+		if (messageValue !== '' && state.rsaObj.receiverPublicKey !== null && state.rsaObj.receiverPrivateKey !== null) {
+			crypt.setKey(state.rsaObj.receiverPublicKey);
 
-	// toggleAll({ todos }, completed) {
-	// 	todos.forEach(todo => todo.completed = completed);
-	// 	storage.set(todos);
-	// },
+			state.rsaObj.encryptedMessage = crypt.encrypt(messageValue);
 
-	// destroy({ todos }, index) {
-	// 	todos.splice(index, 1);
-	// 	storage.set(todos);
-	// },
-
-	// switchFilter(state, filter) {
-	// 	state.filter = filter;
-	// },
-
-	// clearCompleted(state) {
-	// 	state.todos = state.todos.filter(state.filters.active);
-	// 	storage.set(state.todos);
-	// },
-
-	// startEdit(state, index) {
-	// 	state.editIndex = index;
-	// },
-
-	// endEdit(state, title) {
-	// 	if (state.editIndex !== null) {
-	// 		if (title) {
-	// 			state.todos[state.editIndex].title = title;
-	// 			storage.set(state.todos);
-	// 		} else {
-	// 			this.destroy(state, state.index);
-	// 		}
-			
-	// 		// Exit startEdit mode
-	// 		state.editIndex = null;
-	// 	}
-	// },
-
-	// cancelEdit(state) {
-	// 	state.editIndex = null;
-	// }
+			console.log('value: ', state.rsaObj.encryptedMessage)
+		}
+	}
 };
 
 export default function reducer(state = init, action, args) {
