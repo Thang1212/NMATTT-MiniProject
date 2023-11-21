@@ -88,6 +88,7 @@ const actions = {
 		if (messageValue !== '' && state.rsaObj.receiverPublicKey !== null && state.rsaObj.receiverPrivateKey !== null) {
 			crypt.setKey(state.rsaObj.receiverPublicKey);
 
+			state.rsaObj.message = messageValue;
 			state.rsaObj.encryptedMessage = crypt.encrypt(messageValue);
 
 			console.log('value: ', state.rsaObj.encryptedMessage)
