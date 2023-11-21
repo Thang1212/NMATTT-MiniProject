@@ -2,10 +2,42 @@
 import sha1 from './js/sha1.js';
 import md5 from './js/md5.js';
 
+// https://drive.google.com/uc?export=view&id=
+
 const init = {
-	filterSection: 'hero',
-	sha1Arr: [null, null],
-	md5Arr: [null, null],
+	filterSection: 'features',
+
+	sha1Obj: {
+		value: null,
+		hashValue: null,
+	},
+
+	md5Obj: {
+		value: null,
+		hashValue: null,
+	},
+
+	img: {
+		logo: {
+			src: './img/logo.jpeg',
+			link: 'https://drive.google.com/uc?export=view&id=1pUYPJ2jJXIvr6Wv34yIwoorXQVu1Ys6E'
+		}, 
+
+		heroPanel: {
+			src: '../img/thumbnail2.jpeg',
+			link: 'https://drive.google.com/uc?export=view&id=1ZUoxCKsdvKJOrBmvxC3NPdZGb9YRZfv-'
+		},
+
+		sha1Thumbnail: {
+			src: '../img/sha1.jpeg',
+			link: 'https://drive.google.com/uc?export=view&id=15M4D-edjzoGhTMfmvu9tjW6EPU7l_57T'
+		},
+		
+		md5Thumbnail: {
+			src: '../img/md5.png',
+			link: 'https://drive.google.com/uc?export=view&id=1mkCst1Qz8RKHlW_oie6QRI5eDTQZd1WK'
+		}
+	}
 	// todos: storage.get(),
 	// filter: 'all',
 	// filters: {
@@ -29,15 +61,15 @@ const actions = {
 		state.filterSection = 'features';
 	},
 
-	hashPassBySHA1(state, passVal) {
-		state.sha1Arr[0] = passVal;
-		state.sha1Arr[1] = sha1(passVal);
+	hashPasswordBySHA1(state, passVal) {
+		state.sha1Obj.value = passVal;
+		state.sha1Obj.hashValue = sha1(passVal);
 	},
 
-	hashPassByMD5(state, passVal) {
-		state.md5Arr[0] = passVal;
-		state.md5Arr[1] = md5(passVal);
-	}
+	hashPasswordByMD5(state, passVal) {
+		state.md5Obj.value = passVal;
+		state.md5Obj.hashValue = md5(passVal);
+	},
 
 	// add({ todos }, title) {
 	// 	if (title) {
